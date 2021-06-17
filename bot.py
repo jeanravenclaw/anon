@@ -29,7 +29,35 @@ async def on_ready():
     bot.load_extension('jishaku')
     print('We have logged in as {0.user}'.format(bot))
 
-guild_ids = [743128328390836325] # Put your server ID in this array.
+def guild_ids():
+    return db.get("", "guilds", []) # Put your server ID in this array.
+
+@bot.command(
+	name='help', 
+	help="Shows the bot's help command."
+	)
+async def help(ctx):
+	embed = discord.Embed(
+		title = 'Anon Help', 
+		description = """Anon uses slash commands!
+		To start using slash commands, use `/setup`.
+		A list of commands will appear when using `/`"""
+	)
+	await ctx.send(embed=embed)
+
+@bot.command(
+	name='setup', 
+	help="Sets up the server for Anon."
+	)
+async def setup(ctx):
+	guilds = guild_ids
+	if str(ctx.guild.id) not in guilds:
+		guilds.append(str(ctx.guild.id))
+		db.set("", "guilds", guilds)
+		await ctx.send("Added guild to Anon! You can now start using slash commands.")
+	else:
+		await ctx.send("This guild is already set up with Anon!")
+
 
 @slash.slash(
     name="ping", 
