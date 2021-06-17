@@ -1,0 +1,3 @@
+language = "python3"
+run = "pip install -U discord-py-slash-command\npip install -U jishaku\npython bot.py"
+# pip install -U discord-py-slash-command
