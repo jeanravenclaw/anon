@@ -15,7 +15,7 @@ activity = discord.Activity(
 	type=discord.ActivityType.listening
 	)
 bot = commands.Bot(
-	command_prefix='~',
+	command_prefix='/',
 	activity=activity,
 	status=discord.Status.idle,
 	afk=False,
